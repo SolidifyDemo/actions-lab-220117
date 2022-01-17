@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 name: CI for the app
 
 on:
@@ -36,6 +37,3 @@ jobs:
       with:
         name: webapp
         path: webapp/**
-    - name: test
-    run: dotnet test
-
