@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-name: CI for the app
+name: CI/CD for the app
 
 on:
   workflow_dispatch:
@@ -50,8 +50,8 @@ jobs:
     - name: Download a Build Artifact
       uses: actions/download-artifact@v2.0.8
       with:
-        name: webapi
-        path: webapi
+        name: webapp
+        path: webapp
 
     - name: Login via Azure CLI
       uses: azure/login@v1
