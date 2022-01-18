@@ -16,7 +16,7 @@ on:
 jobs:
   build:
 
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v2
@@ -37,3 +37,40 @@ jobs:
       with:
         name: webapp
         path: webapp/**
+  
+  deploy_staging:
+    name: "Deploy to staging"
+    needs: build
+    runs-on: ubuntu-latest   
+
+    environment:
+      name: Stage
+      
+    steps:
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v2.0.8
+      with:
+        name: webapi
+        path: webapi
+
+    - name: Login via Azure CLI
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy web app
+      id: deploywebapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: "actions-demo-api"
+        package: webapi
+
+    - name: az cli logout
+      run: az logout    
+    
+    
+    
+    
+    
+    
+    
