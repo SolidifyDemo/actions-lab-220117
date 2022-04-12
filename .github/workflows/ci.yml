@@ -45,6 +45,7 @@ jobs:
 
     environment:
       name: Stage
+      url: ${{ steps.deploywebapp.outputs.webapp-url }}
       
     steps:
     - name: Download a Build Artifact
